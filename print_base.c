@@ -21,7 +21,6 @@ int print_hex(va_list l, flags_t *f)
 	count += _puts(str);
 	return (count);
 }
-
 /**
  * print_hex_big - prints a number in hexadecimal base,
  * in uppercase

@@ -26,57 +26,14 @@ int (*get_print(char s))(va_list, flags_t *)
 		{'r', print_rev},
 		{'S', print_bigS},
 		{'p', print_address},
-		{'%', print_percent},
+		{'%', print_percent}
 		};
-	ph func_arrl[] = {
-		{'d', print_long_int},
-		{'i', print_long_int},
-		{'u', print_long_unsigned},
-		{'o', print_long_octal},
-		{'x', print_long_hex},
-		{'X', print_long_hex_big},
-	};
-	ph func_arrh[] = {
-		{'d', print_short_int},
-		{'i', print_short_int},
-		{'u', print_short_unsigned},
-		{'o', print_short_octal},
-		{'x', print_short_hex},
-		{'X', print_short_hex_big},
-	};
-
 	int flags = 14;
-	int flags2 = 6;
 
-	register int i; 
-	register int j;
+	register int i;
 
-	if ('l' == s)
-	{
-		for (j = 0; j < flags2; j++)
-		{
-			if (func_arrl[i].c == *(s + 1))
-			{
-				return (func_arrl[i].f);
-			}
-		}
-
-	}
-	else if ('h' == s)
-	{
-		for (j = 0; j < flag2; j++)
-		{
-			if (func_arrh[i].c == *(s + 1))
-			{
-				return (func_arrh[i].f);
-			}
-		}
-	}
-	
 	for (i = 0; i < flags; i++)
-	{
 		if (func_arr[i].c == s)
 			return (func_arr[i].f);
-	}
 	return (NULL);
 }

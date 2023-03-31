@@ -73,11 +73,4 @@ int print_address(va_list l, flags_t *f);
 /* print_percent */
 int print_percent(va_list l, flags_t *f);
 
-/* print long */
-int print_long_int(va_list l, flags_t *f);
-int print_long_unsigned(va_list l, flags_t *f);
-int print_long_octal(va_list l, flags_t *f);
-int print_long_hex(va_list l, flags_t *f);
-int print_long_hex_big(va_list l, flags_t *f);
-
 #endif
