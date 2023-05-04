@@ -48,6 +48,8 @@ int _printf(const char *format, ...)
 					str = va_arg(arg_ptr, char*);
 					if (str != NULL)
 						len += print_by_char(str);
+					else
+						return (0);
 					break;
 				case 'c':
 					_putchar(va_arg(arg_ptr, int));
@@ -59,7 +61,7 @@ int _printf(const char *format, ...)
 					break;
 			}
 		}
-		else if (s == '%' && t)
+		else
 		{
 			_putchar(format[i]);
 			len++;
