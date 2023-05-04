@@ -5,6 +5,35 @@
 #include <stdarg.h>
 #include "main.h"
 /**
+ * print_int - prints integers
+ * @num: the int
+ * Return: the number of characters printed
+ */
+int print_int(int num)
+{
+	char str[20];
+	int i = 0;
+	int len = 0;
+
+	if (num < 0)
+	{
+		write(STDOUT_FILENO, "-", 1);
+		num = -num;
+	}
+	do
+	{
+		str[i++] = num % 10 + '0';
+		num /= 10;
+	}
+	while (num > 0);
+	while (i > 0)
+	{
+		write(STDOUT_FILENO, &str[--i], 1);
+		len++;
+	}
+	return (len);
+}
+/**
  * print_by_char - prints a string character by character
  * @str: the string to print
  * Return: the amount of characters printed
@@ -20,43 +49,6 @@ int print_by_char(char *str)
 		i++;
 	}
 	return (len);
-}
-/**
- * checkArgs - checks the variadic arguments if any one is
- * equal to NULL.
- * @arg: argument
- * @format: the format string
- * Return: true or false
- */
-bool checkArgs(va_list arg, const char *format)
-{
-	int i = 0;
-	char t, s;
-	char *str;
-	bool flag = true;
-
-	while (format[i])
-	{
-		t = format[i];
-		s = format[i + 1];
-		if (t == '%' && (s == 'c' || s == 's'))
-		{
-			switch (s)
-			{
-				case 'c':
-					va_arg(arg, int);
-					break;
-				case 's':
-					str = va_arg(arg, char*);
-					if (str == NULL)
-						return (flag);
-					break;
-			}
-		}
-		i++;
-	}
-	flag = false;
-	return (flag);
 }
 int p_switch(va_list arg, char format);
 /**
@@ -80,7 +72,7 @@ int _printf(const char *format, ...)
 		t = format[i + 1];
 		if (s == '%' && !t)
 			return (-1);
-		if (s == '%' && (t == 'c' || t == 's' || t == '%'))
+		if (s == '%' && (t == 'c' || t == 's' || t == '%' || t == 'd' || t == 'i'))
 		{
 			i++;
 			len += p_switch(agp2, format[i]);
@@ -117,6 +109,14 @@ int p_switch(va_list arg, char format)
 			break;
 		case 'c':
 			_putchar(va_arg(arg, int));
+			len = 1;
+			break;
+		case 'd':
+			print_int(va_arg(arg, int));
+			len = 1;
+			break;
+		case 'i':
+			print_int(va_arg(arg, int));
 			len = 1;
 			break;
 		case '%':
