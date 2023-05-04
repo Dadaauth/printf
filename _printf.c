@@ -30,13 +30,16 @@ int _printf(const char *format, ...)
 {
 	va_list arg_ptr;
 	int i = 0, len = 0;
-	char *str;
+	char *str, t, s;
 
+	if (format == NULL)
+		return (0);
 	va_start(arg_ptr, format);
-
 	while (format[i])
 	{
-		if (format[i] == '%')
+		s = format[i];
+		t = format[i + 1];
+		if (s == '%' && (t == 'c' || t == 's' || t == '%'))
 		{
 			i++;
 			switch (format[i])
@@ -56,7 +59,7 @@ int _printf(const char *format, ...)
 					break;
 			}
 		}
-		else
+		else if (s == '%' && t)
 		{
 			_putchar(format[i]);
 			len++;
